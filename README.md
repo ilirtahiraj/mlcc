@@ -34,6 +34,25 @@ Fig. 2 Adaptive voxelization in LiDAR-LiDAR extrinsic calibration.
 ![](figure/camera_voxel.png)
 Fig. 3 Adaptive voxelization in LiDAR-camera extrinsic calibration. A) real-world image. B) raw point cloud of this scene. C) voxelization of [previous work](https://ieeexplore.ieee.org/document/9495137?source=authoralert) where the yellow circles indicate the false edge estimation. D) edges extracted with our proposed method.
 
+## 0. Docker
+
+### Build the docker
+
+```
+docker build -t mlcc:latest -f docker/Dockerfile .
+```
+
+### Run the docker
+
+```
+docker run -t mlcc:latest -f docker/Dockerfile .
+```
+
+### Source the workspace
+```
+cd catkin_ws/ && source devel/setup.bash
+```
+
 ## 1. Prerequisites
 Our code has been tested on `Ubuntu 16.04` with `ROS Kinetic`, `Ubuntu 18.04` with `ROS Melodic` and `Ubuntu 20.04` with `ROS Noetic`, [Ceres Solver 1.14.x](https://github.com/ceres-solver/ceres-solver), [OpenCV 3.4.14](https://github.com/opencv/opencv), [Eigen 3.3.7](https://gitlab.com/libeigen/eigen), [PCL 1.8](https://github.com/PointCloudLibrary/pcl).
 
@@ -47,12 +66,6 @@ cd .. && catkin_make
 source ~/catkin_ws/devel/setup.bash
 ```
 
-## 3. Docker
-
-```
-docker build -t mmcl:latest -f docker/Dockerfile .
-```
-
 ## 3. Run Our Example
 The parameters base LiDAR (`AVIA` or `MID`), test scene (`scene-1` or `scene-2`), `adaptive_voxel_size`, etc., could be modified in the corresponding launch file. We also provide the original rosbag files ([scene-1](https://drive.google.com/file/d/1x6wGXzZHTZiM9oz7_c4DludH0Q7sgy0e/view?usp=sharing) and [scene-2](https://drive.google.com/file/d/1cwjf2Uei2vX2Uqcz5DJtDTPlRcl592sn/view?usp=sharing)) for your reference.
 ### 3.1 Multi-LiDAR Extrinsic Calibration
@@ -61,7 +74,6 @@ Step 1: base LiDAR pose optimization (the initial pose is stored in `scene-x/ori
 ```
 roslaunch mlcc pose_refine.launch
 ```
-
 Step 2: LiDAR extrinsic optimization (the initial extrinsic is stored in `config/init_extrinsic`)
 ```
 roslaunch mlcc extrinsic_refine.launch
@@ -69,8 +81,9 @@ roslaunch mlcc extrinsic_refine.launch
 
 Step 3: pose and extrinsic joint optimization
 ```
-roslaunch mlcc global_refine.launch
+roslaunch mlcc global.launch
 ```
+
 ### 3.2 Multi-LiADR-Camera Extrinsic Calibration
 ```
 roslaunch mlcc calib_camera.launch
