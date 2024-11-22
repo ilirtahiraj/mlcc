@@ -47,6 +47,12 @@ cd .. && catkin_make
 source ~/catkin_ws/devel/setup.bash
 ```
 
+## 3. Docker
+
+```
+docker build -t mmcl:latest -f docker/Dockerfile .
+```
+
 ## 3. Run Our Example
 The parameters base LiDAR (`AVIA` or `MID`), test scene (`scene-1` or `scene-2`), `adaptive_voxel_size`, etc., could be modified in the corresponding launch file. We also provide the original rosbag files ([scene-1](https://drive.google.com/file/d/1x6wGXzZHTZiM9oz7_c4DludH0Q7sgy0e/view?usp=sharing) and [scene-2](https://drive.google.com/file/d/1cwjf2Uei2vX2Uqcz5DJtDTPlRcl592sn/view?usp=sharing)) for your reference.
 ### 3.1 Multi-LiDAR Extrinsic Calibration
