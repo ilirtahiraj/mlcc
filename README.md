@@ -45,7 +45,7 @@ docker build -t mlcc:latest -f docker/Dockerfile .
 ### Run the docker
 
 ```
-docker run -t mlcc:latest -f docker/Dockerfile .
+docker run -it  mlcc:latest 
 ```
 
 ### Source the workspace
