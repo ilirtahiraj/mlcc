@@ -7,7 +7,7 @@
     <param name="max_iter" type="int" value="10"/>
 
     <!-- base LiDAR: 0-2 is the MID from left to right, 3 is AVIA -->
-    <param name="base_lidar" type="int" value="3"/>
+    <param name="base_lidar" type="int" value="4"/>
 
     <!-- largest voxel size:
     if AVIA is set as base LiDAR use 4, if MID is set as base LiDAR use 4/2 for scene-1/scene-2 -->
