@@ -1,6 +1,7 @@
 import pickle 
 import numpy as np
 from scipy.spatial.transform import Rotation as R
+from visualize import transform_pcds
 
 openfile = open('/media/ilirtahiraj/OSshared/diss/dissertation/03_paper/03_SensorToVehicle/carla_town01/scenario_1/output.pkl', "rb")
 data_storage = pickle.load(openfile)
@@ -12,29 +13,34 @@ T_r = data_storage["T_r"]
 rotation_f = R.from_matrix(T_f[:3, :3])
 rotation_r = R.from_matrix(T_r[:3, :3])
 
-# Convert to quaternion (qx, qy, qz, qw)
-quaternion_f = rotation_f.as_quat()
-quaternion_r = rotation_r.as_quat()
+# (qx, qy, qz, qw)
 
 # S2S 
-S2S = np.linalg.inv(T_f).dot(T_r)
-rotation = R.from_matrix(S2S[:3, :3])
-rotation.as_euler('zxy', degrees=True)
+
+S2S = T_f @ np.linalg.inv(T_r)
+
+rotation = R.from_matrix(S2S[:3,:3])
 quaternion = rotation.as_quat()
+euler = rotation.as_euler('xyz', degrees=False)
 
 # Initial Extrinsics
-print("Translation Front: ", T_f[:3,3])
-print("Quaternion Front: ", quaternion_f) 
-print("Translation Rear: ", T_r[:3,3])
-print("Quaternion Rear: ", quaternion_r) 
-print("Translation S2S: ", S2S[:3,3])
-print("Quaternion S2S: ", quaternion_r) 
+print("Translation S2S (x, y, z): ", S2S[:3,3])
+print("Quaternion S2S (qx, qy, qz, qw): ", quaternion) 
+print("Euler S2S: ", euler) 
 
-
+#transform_pcds('/media/ilirtahiraj/OSshared/diss/dissertation/03_paper/03_SensorToVehicle/carla_town01/scenario_1/')
+pose = []
 for pcd_path, car_pose in data_storage["pointcloud_f"]:
-    # TODO
-    pass
+    car_rotation = R.from_matrix(car_pose[:3,:3])
+    quaternion = car_rotation.as_quat()
 
-for pcd_path, car_pose in data_storage["pointcloud_r"]:
-    # TODO
-    pass
+    pose.append([car_pose[0,3], car_pose[1,3],car_pose[2,3], quaternion[3], quaternion[0], quaternion[1], quaternion[2]])
+
+# Save the poses to a text file
+output_file = "poses.txt"
+with open(output_file, 'w') as f:
+    for p in pose:
+        # Convert each pose to a space-separated string
+        f.write(" ".join(map(str, p)) + "\n")
+
+print(f"Poses saved to {output_file}")
