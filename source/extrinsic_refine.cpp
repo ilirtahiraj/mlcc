@@ -106,6 +106,12 @@ int main(int argc, char** argv)
   sensor_msgs::PointCloud2 debugMsg, colorCloudMsg;
   vector<mypcl::pose> pose_vec = mypcl::read_pose(data_path + "pose.json");
   vector<mypcl::pose> ref_vec = mypcl::read_pose(data_path + "ref.json");
+      // Create the path
+    std::string path = data_path + "pose.json";
+
+    // Print the path
+    std::cout << "Created Path for Extrinsic: " << path << std::endl;
+
   size_t ref_size = ref_vec.size();
   size_t pose_size = pose_vec.size();
   
@@ -119,6 +125,10 @@ int main(int argc, char** argv)
   vector<pcl::PointCloud<PointType>::Ptr> base_pc, ref_pc;
   base_pc.resize(pose_size);
   ref_pc.resize(pose_size);
+    std::string base_lidar_path = data_path + std::to_string(base_lidar);
+    std::string ref_lidar_path = data_path + std::to_string(ref_lidar);
+    std::cout << "Created Path for Base: " << base_lidar_path << std::endl;
+    std::cout << "Created Path for Ref: " << ref_lidar_path << std::endl;
   for(size_t i = 0; i < pose_size; i++)
   {
     pcl::PointCloud<PointType>::Ptr pc_base(new pcl::PointCloud<PointType>);

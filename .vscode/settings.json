@@ -72,7 +72,13 @@
         "variant": "cpp",
         "bit": "cpp",
         "core": "cpp",
-        "stdvector": "cpp"
+        "stdvector": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "forward_list": "cpp",
+        "numbers": "cpp",
+        "semaphore": "cpp",
+        "stop_token": "cpp"
     },
     "python.analysis.extraPaths": [
         "/home/sam/catkin_ws/devel/lib/python3/dist-packages",

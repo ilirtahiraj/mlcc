@@ -85,8 +85,13 @@ int main(int argc, char** argv)
 
   sensor_msgs::PointCloud2 debugMsg, colorCloudMsg;
   vector<mypcl::pose> pose_vec;
-  if(load_original)
+  if(load_original){
+    // Create the path
+    std::string path = data_path + "original_pose/" + std::to_string(base_lidar) + ".json";
+    // Print the path
+    std::cout << "Created Path: " << path << std::endl;
     pose_vec = mypcl::read_pose(data_path + "original_pose/" + to_string(base_lidar) + ".json");
+  }
   else
     pose_vec = mypcl::read_pose(data_path + "pose.json");
   size_t pose_size = pose_vec.size();

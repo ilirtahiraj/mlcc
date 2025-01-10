@@ -90,12 +90,20 @@ int main(int argc, char** argv)
   nh.getParam("max_iter", max_iter);
   nh.getParam("base_lidar", base_lidar);
   nh.getParam("ref_lidar1", ref_lidar1); ref_lidar.emplace_back(ref_lidar1);
-  nh.getParam("ref_lidar2", ref_lidar2); ref_lidar.emplace_back(ref_lidar2);
-  if(ref_lidar3 != -1) {nh.getParam("ref_lidar3", ref_lidar3); ref_lidar.emplace_back(ref_lidar3);}
+  //nh.getParam("ref_lidar2", ref_lidar2); ref_lidar.emplace_back(ref_lidar2);
+  //if(ref_lidar3 != -1) {nh.getParam("ref_lidar3", ref_lidar3); ref_lidar.emplace_back(ref_lidar3);}
   nh.getParam("voxel_size", voxel_size);
   nh.getParam("eigen_threshold", eigen_thr);
   nh.getParam("downsample_base", downsmp_base);
   nh.getParam("downsample_ref", downsmp_ref);
+    std::string base_lidar_path = data_path + std::to_string(base_lidar);
+    //std::string ref_lidar_path = data_path + std::to_string(ref_lidar);
+    std::cout << "Created Path for Base: " << base_lidar_path << std::endl;
+    std::cout << "Vector elements: ";
+    for (int i = 0; i < ref_lidar.size(); ++i) {
+        std::cout << ref_lidar[i] << " ";  // Print each element followed by a space
+    }
+    std::cout << std::endl;
 
   sensor_msgs::PointCloud2 debugMsg, colorCloudMsg;
   vector<mypcl::pose> pose_vec = mypcl::read_pose(data_path + "pose.json");
@@ -180,6 +188,7 @@ int main(int argc, char** argv)
   cout << "complete" << endl;
   cout << "averaged iteration time " << avg_time / (loop+1) << endl;
   mypcl::write_pose(pose_vec, ref_vec, data_path);
+
 
   Eigen::Quaterniond q0(pose_vec[0].q.w(), pose_vec[0].q.x(),
                         pose_vec[0].q.y(), pose_vec[0].q.z());

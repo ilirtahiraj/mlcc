@@ -1,7 +1,9 @@
 <launch>
+
+  <arg name="scene_number" default="2"/>
   <node pkg="mlcc" type="global" name="global" output="screen">
     <!-- test scene -->
-    <param name="data_path" type="string" value="$(find mlcc)/scene2/"/>
+    <param name="data_path" type="string" value="$(find mlcc)/scene$(arg scene_number)/"/>
 
     <!-- optimization iteration number -->
     <param name="max_iter" type="int" value="10"/>
@@ -11,20 +13,20 @@
 
     <!-- LiDAR to be calibrated
     The extrinsic sequence in ref.json needs to be the same with here -->
-    <param name="ref_lidar2" type="int" value="5"/>
+    <param name="ref_lidar1" type="int" value="5"/>
 
     <!-- largest voxel size:
     if AVIA is set as base LiDAR use 4, if MID is set as base LiDAR use 1 -->
-    <param name="voxel_size" type="double" value="4"/>
+    <param name="voxel_size" type="double" value="0.1"/>
 
     <!-- base LiDAR downsampling size:
     if AVIA is set as base LiDAR use 0.4, if MID is set as base LiDAR use 0.1 -->
-    <param name="downsample_base" type="double" value="0.4"/>
+    <param name="downsample_base" type="double" value="0.1"/>
 
     <!-- LiDAR to be calibrated downsampling size:
     if AVIA is set as base LiDAR use 0.2 (e.g., using AVIA to calibrate MID),
     if MID is set as base LiDAR use 0.1 (e.g., MID self calibration) -->
-    <param name="downsample_ref" type="double" value="0.2"/>
+    <param name="downsample_ref" type="double" value="0.1"/>
     <param name="eigen_threshold" type="double" value="20"/>
   </node>
 

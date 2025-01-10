@@ -1,7 +1,8 @@
 <launch>
+  <arg name="scene_number" default="2"/>
   <node pkg="mlcc" type="pose_refine" name="pose_refine" output="screen">
     <!-- test scene -->
-    <param name="data_path" type="string" value="$(find mlcc)/scene2/"/>
+    <param name="data_path" type="string" value="$(find mlcc)/scene$(arg scene_number)/"/>
 
     <!-- optimization iteration number -->
     <param name="max_iter" type="int" value="10"/>
@@ -11,12 +12,12 @@
 
     <!-- largest voxel size:
     if AVIA is set as base LiDAR use 4, if MID is set as base LiDAR use 4/2 for scene-1/scene-2 -->
-    <param name="voxel_size" type="double" value="4"/>
+    <param name="voxel_size" type="double" value="5"/>
 
     <!-- base LiDAR downsampling size:
     downsample_base: if AVIA is set as base LiDAR use 0.4, if MID is set as base LiDAR use 0.1
     eigen_threshold: if AVIA is set as base LiDAR use 10, if MID is set as base LiDAR use 20 -->
-    <param name="downsample_base" type="double" value="0.4"/>
+    <param name="downsample_base" type="double" value="0.1"/>
     <param name="load_original" type="bool" value="1"/>
     <param name="eigen_threshold" type="double" value="10"/>
   </node>
