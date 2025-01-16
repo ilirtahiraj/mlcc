@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define the range of scene numbers
-START_SCENE=2
-END_SCENE=3
+START_SCENE=1
+END_SCENE=1
 
 # Docker container and image settings
 DOCKER_IMAGE="mlcc:edgar"
@@ -14,9 +14,9 @@ CONTAINER_PATH="/catkin_ws/src/mlcc"
 
 # Three different launch files with respective timeouts
 declare -A LAUNCH_TIMEOUTS=(
-  ["pose_refine.launch"]=10
-  ["extrinsic_refine.launch"]=45
-  ["global.launch"]=70
+  ["pose_refine.launch"]=15
+  ["extrinsic_refine.launch"]=75
+  ["global.launch"]=90
 )
 
 # Function to run Docker with specified scene and launch file

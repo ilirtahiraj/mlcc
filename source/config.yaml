@@ -1,0 +1,16 @@
+transform_lidar_f_sim:
+  - [0.0, 10.0, 0.0, 2.259, 0.0, 1.938] #[roll, pitch, yaw, x, y z]
+transform_lidar_r_sim:
+  - [0.0, 10.0, 180.0, -0.3987347, 0.002735673, 2.098425312] 
+transform_lidar_f:
+  - [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] 
+transform_lidar_r:
+  - [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] 
+bounds_scenario_1_sim:
+  - [5.0, 2.0, -5.0, 15.0, 12.0, 5.0] #[min x, min y, min z, max x, max, y, max z]
+bounds_scenario_2_sim:
+  - [10.0, -14.0, -5.0, 20.0, -4.0, 5.0]
+bounds_scenario_1:
+ - [-5, 14.0, -50, 0.0, 17.0, 50]
+bounds_scenario_2:
+  - [-12, 15, -50, -5, 19, 2]
